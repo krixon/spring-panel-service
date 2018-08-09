@@ -1,4 +1,4 @@
-package com.krixon.panelservice.application.dto;
+package com.krixon.panelservice.dto;
 
 public class Panel {
     public final String id;
