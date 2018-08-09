@@ -21,6 +21,6 @@ public class PanelServiceApplication {
 
     @Bean
     public ResourceServerTokenServices userInfoTokenServices() {
-        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
+        return new OAuth2UserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
     }
 }
