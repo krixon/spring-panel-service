@@ -18,9 +18,9 @@ public class PanelController {
 
         ArrayList<Panel> panels = new ArrayList<>();
 
-        panels.add(new Panel("1", "Foo Panel"));
-        panels.add(new Panel("2", "Bar Panel"));
-        panels.add(new Panel("3", "Baz Panel"));
+        panels.add(new Panel("1", "David Lister Appreciation Society"));
+        panels.add(new Panel("2", "Beef and Dairy Network"));
+        panels.add(new Panel("3", "Some Panel Name"));
 
         return panels;
     }
