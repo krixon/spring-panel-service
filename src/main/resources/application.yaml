@@ -1,3 +1,7 @@
+spring:
+  application:
+    name: panel-service
+
 server:
   port: 9001
   servlet:
