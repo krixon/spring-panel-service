@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: panel-service
   sleuth:
     sampler:
       probability: 1.0
@@ -8,7 +6,7 @@ spring:
     base-url: http://localhost:9411
 
 server:
-  port: 9001
+  port: 0 # Bind to a random available port on startup.
   servlet:
     context-path: /services
 
@@ -19,3 +17,14 @@ security:
       client-secret: panel-service-secret
     resource:
       user-info-uri: http://localhost:9000/services/user
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    # The ID of this particular instance of the service.
+    # In reality, this would be some logical name configured as part of the environment.
+    # In development, we just generate a random number to allow multiple instances to be run concurrently.
+    instance-id: ${spring.application.name}:${random.int}
