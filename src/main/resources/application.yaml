@@ -21,16 +21,22 @@ security:
 
 eureka:
   client:
+    # These client config params are all default values, but added for explicitness.
     service-url:
+      # In production this would probably be a list of URLs.
       default-zone: http://localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
   instance:
     # The ID of this particular instance of the service.
     instance-id: ${spring.application.name}:${instance.id}
+    # Change the default status and health URLs to match the custom actuator endpoint base path.
+    status-page-url-path: /management/info
+    health-check-url-path: /management/health
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+      base-path: /management

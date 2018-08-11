@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/api/panels")
 public class PanelController
 {
     private final SpanCustomizer span;
@@ -20,7 +21,7 @@ public class PanelController
         this.span = span;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("")
     @PreAuthorize("#oauth2.hasScope('panel:read')")
     public ArrayList<Panel> getPanelList()
     {
