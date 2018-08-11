@@ -1,7 +1,6 @@
 package com.krixon.panelservice.controller;
 
-import brave.Span;
-import brave.Tracer;
+import brave.SpanCustomizer;
 import com.krixon.panelservice.dto.Panel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,10 +12,15 @@ import java.util.ArrayList;
 @RestController
 public class PanelController
 {
-    @Autowired
-    private Tracer tracer;
+    private final SpanCustomizer span;
 
-    @RequestMapping("/panels")
+    @Autowired
+    public PanelController(SpanCustomizer span)
+    {
+        this.span = span;
+    }
+
+    @RequestMapping("/")
     @PreAuthorize("#oauth2.hasScope('panel:read')")
     public ArrayList<Panel> getPanelList()
     {
@@ -24,19 +28,13 @@ public class PanelController
 
         ArrayList<Panel> panels = new ArrayList<>();
 
-        Span span = tracer
-            .nextSpan()
-            .name("fetch panel list")
-            .kind(Span.Kind.SERVER)
-            .start();
+        span.annotate("Fetch Panel List Start");
 
-        try {
-            panels.add(new Panel("1", "David Lister Appreciation Society"));
-            panels.add(new Panel("2", "Beef and Dairy Network"));
-            panels.add(new Panel("3", "Some Panel Name"));
-        } finally {
-            span.finish();
-        }
+        panels.add(new Panel("1", "David Lister Appreciation Society"));
+        panels.add(new Panel("2", "Beef and Dairy Network"));
+        panels.add(new Panel("3", "Some Panel Name"));
+
+        span.annotate("Fetch Panel List Finish");
 
         return panels;
     }
