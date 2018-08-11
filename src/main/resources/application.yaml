@@ -1,3 +1,6 @@
+instance:
+  id: 1
+
 spring:
   sleuth:
     sampler:
@@ -25,6 +28,4 @@ eureka:
     fetch-registry: true
   instance:
     # The ID of this particular instance of the service.
-    # In reality, this would be some logical name configured as part of the environment.
-    # In development, we just generate a random number to allow multiple instances to be run concurrently.
-    instance-id: ${spring.application.name}:${random.int}
+    instance-id: ${spring.application.name}:${instance.id}
